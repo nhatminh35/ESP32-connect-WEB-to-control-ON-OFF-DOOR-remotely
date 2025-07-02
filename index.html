@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+   
+
+    <title>Trang 1</title>
+</head>
+<body>
+
+
+
+  <form>
+    <div class="background">
+    <div class="mainpositon">    <div id= "main"> 
+      <div id="top">
+        <div id="time"> </div>
+        
+         <script>
+        function dongho() {
+        var time = new Date();
+        var gio = time.getHours();
+        var phut = time.getMinutes();
+        var giay = time.getSeconds();
+        if (gio < 10) 
+        gio = "0" + gio;
+        if (phut < 10) 
+        phut = "0" + phut;
+        if (giay < 10) 
+        giay = "0" + giay;
+        document.getElementById("time").innerHTML = gio + ":" + phut + ":" + giay;
+        setTimeout("dongho()", 1000);
+   
+        };
+        dongho();
+        </script> 
+         <h1 style="text-align:center;">XÓM TRỌ YÊU THƯƠNG</h1>
+         <h3 style="text-align:center;">Độc Lập - Tự Do - Hạnh Phúc</h3>
+         <div style="text-align: center; font-size: 47px;">
+           <h1 style="text-align:center;">QUẢN LÝ KHU VỰC TỪ XA </h1>
+          
+         <div class ="nhietdo">
+          <h3>KHU TRỌ 1</h3>
+         <p><b>Số Phòng Hoạt Động: <span id="total"></span> Phòng</b></p >
+         <p><b>ID Vừa Rồi : <span id="nhietdo"></span></b></p >
+          <p><b>Trạng Thái : <span id="doam"></span></b></p >
+        </div>
+       <div class ="nhietdo_2">
+        <h3>KHU TRỌ 2</h3>
+         <p><b>Số Phòng Hoạt Động: <span id="total_2"></span> Phòng</b></p >
+         <p><b>ID Vừa Rồi : <span id="nhietdo_2"></span></b></p >
+          <p><b>Trạng Thái : <span id="doam_2"></span></b></p >
+      
+              
+      </div>
+        </div>  
+        <div class="image_left">
+       <img src="img/anhtruong.png"  width="100" height="100">
+        </div>
+        <div class="image_right">
+          <img src="img/anhtruong.png"  width="100" height="100">
+           </div>
+
+  <div class ="fontmain">
+ 
+
+  </form>
+  <div class ="fontname">
+    <h2 style="text-align:center;"> Nguyễn Công Nhật Minh - Lê Khắc Duy</h2>
+    </div>
+   
+  </form>
+<!----  <h2 style="text-align:center;"> Nguyễn Công Nhật Minh - Lê Bình An</h2> -->
+ 
+</main>
+   
+
+  <div class="bottom" >
+  <div class="xomtro1">
+    <div class = right>
+      <div class="top">
+        
+            <div class="square-box">
+              <div class="image-container">
+              <div class="device-container">
+              
+                <img id="device1" src="img/lamp_off.png" class="lamp" alt="Đèn 1">
+                <img id="device2" src="img/lamp_off.png" class="lamp" alt="Đèn 2">
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          
+ <div class="OPEN_QUICKLY_1">
+    <div class="square-box_1">
+      <div class="image-container_1">
+        <div class="device-container_1">
+
+                <img id="CUA_1" src="img/lock.png" class="lamp" alt="Đèn 6">
+
+        </div>
+    </div>
+  </div>
+</div>
+ <div class="OPEN_QUICKLY_2">
+    <div class="square-box_4">
+      <div class="image-container_4">
+        <div class="device-container_2">
+
+                <img id="CUA_2" src="img/lock.png" class="lamp" alt="Đèn 5">
+
+        </div>
+    </div>
+  </div>
+</div>
+
+          <div class="bottom" >
+            <div class="xomtro2"> 
+              <div class = right>
+                <div class="top">
+                 
+                      <div class="square-box">
+                        <div class="image-container">
+                        <div class="device-container">
+                        
+                          <img id="device3" src="img/lamp_off.png" class="lamp" alt="Đèn 3">
+                          <img id="device4" src="img/lamp_off.png" class="lamp" alt="Đèn 4">
+                          
+                          </div>
+                        </div>
+                      </div>
+                    </div>          
+               <div class="bottom">
+               <div class="potion_button_xom1">
+            <button type="button" id="btn1" class="btn waves-effect waves-lights"style="padding: 10px 30px; font-size: 20px; height: 50px; min-width: 30px;">Tầng 1</button>
+            
+            <!-- label hien thi text hoac cac chu dan hien thi tren web -->
+            <button type="button" id="btn3" class="btn waves-effect waves-lights" style="padding: 10px 30px; font-size: 20px; height: 50px; min-width: 30px;">Tầng 2</button>
+           
+          </div>
+        </div>
+          <div class="potion_button_xom2">
+            <button type="button" id="btn5" class="btn waves-effect waves-lights" style="padding: 10px 30px; font-size: 20px; height: 50px; min-width: 30px;">Tầng 1</button>
+          
+        
+            <button type="button" id="btn7" class="btn waves-effect waves-lights" style="padding: 10px 30px; font-size: 20px; height: 50px; min-width: 30px;">Tầng 2</button>
+           
+                       
+            
+          </div>
+               </div>
+                </div>
+                  </div>
+                    </div>
+                      </div>
+                        </div>
+                          </div>   
+                            </div>    
+
+<div class="QUICKLY_1">
+
+<button type="button" id="btn_CUA_1_ON" class="btn waves-effect waves-lights" style="padding: 5px 30px; font-size: 25px; height: 50px; min-width: 30px;">DOOR</button>
+
+            
+</div>
+<div class="QUICKLY_2">
+
+<button type="button" id="btn_CUA_2_ON" class="btn waves-effect waves-lights" style="padding: 5px 30px; font-size: 25px; height: 50px; min-width: 30px;">DOOR</button>
+            
+
+
+
+</div>
+
+                            <div class ="ChangePage">
+                            <a href="page1.html" style="padding: 10px 70px;font-size: 20px; height: 50px; min-width: 500px; background-color: #20c997; color: white; text-decoration: none; border-radius: 10px;">Data</a>
+                            <a href="page2.html" style="padding: 10px 70px;font-size: 20px; height: 50px; min-width: 500px; background-color: #20c997; color: white; text-decoration: none; border-radius: 10px;">Vân Tay</a>
+                         
+                          </div> 
+                           </div>
+                            
+                            
+
+<form>
+
+
+    
+<script src="functions.js"></script>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    
+
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+<!-- lien ket voi functions.js -->
+
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+ 
+    const firebaseConfig = {
+          apiKey: "AIzaSyDUYbFI63SZmYV9SAyj_MCZcduuisIqxxc",
+          authDomain: "minhnode-1eacf.firebaseapp.com",
+          databaseURL: "https://minhnode-1eacf-default-rtdb.firebaseio.com",
+          projectId: "minhnode-1eacf",
+          storageBucket: "minhnode-1eacf.firebasestorage.app",
+          messagingSenderId: "1007786576866",
+          appId: "1:1007786576866:web:0810872495a6184ae747bb",
+          measurementId: "G-YF59ZNWLKC"
+      };
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+  //functions
+  // make sure that the name in ' ' match with name of your database child
+  function getFirebaseData() {
+        const tempRef = database.ref("/IN_OUT/ID");
+        const humiRef = database.ref("/IN_OUT/Trang_Thai");
+        const total   = database.ref("/TOTAL_PEOPLE/IN");
+        
+
+        const tempRef_2 = database.ref("/IN_OUT_2/ID");
+        const humiRef_2 = database.ref("/IN_OUT_2/Trang_Thai");
+        const total_2   = database.ref("/TOTAL_PEOPLE_2/IN");
+
+
+        total.on("value", (snapshot) => {
+            document.getElementById("total").innerText = snapshot.val();
+            
+        });
+        tempRef.on("value", (snapshot) => {
+            document.getElementById("nhietdo").innerText = snapshot.val();
+            document.getElementById("nhietdoDisplay").innerText = snapshot.val();
+        });
+
+        humiRef.on("value", (snapshot) => {
+          const doam = snapshot.val();
+             document.getElementById("doam").innerText = ((parseInt(doam))==0) ? "Ra" : "Vào";
+             document.getElementById("doamDisplay").innerText = snapshot.val();
+        });
+        total_2.on("value", (snapshot) => {
+            document.getElementById("total_2").innerText = snapshot.val();
+            
+        });
+        tempRef_2.on("value", (snapshot) => {
+            document.getElementById("nhietdo_2").innerText = snapshot.val();
+            
+        });
+
+        humiRef_2.on("value", (snapshot) => {
+             const doam_2 = snapshot.val();
+             document.getElementById("doam_2").innerText = ((parseInt(doam_2))==0) ? "Ra" : "Vào";
+            
+        });
+
+
+    }
+    function saveTemperatureWithHumidity(nhietdo) {
+          database.ref("/IN_OUT/TrangThai").once("value").then((snapshot) => {
+              let doam = snapshot.val();
+              document.getElementById("doam").innerText = doam;
+              addRow(nhietdo, doam);
+          });
+      }
+          function saveTemperatureWithHumidity_2(nhietdo) {
+          database.ref("/IN_OUT_2/TrangThai").once("value").then((snapshot) => {
+              let doam_2 = snapshot.val();
+              document.getElementById("doam_2").innerText = doam_2;
+              addRow_2(nhietdo_2, doam_2);
+          });
+      }
+    getFirebaseData();
+   function sendData() {
+    let nhietdo = document.getElementById("nhietdo").innerText;
+    localStorage.setItem("nhietdo", nhietdo);
+
+    let doam = document.getElementById("doam").innerText;
+    localStorage.setItem("doam", doam);
+
+    let total = document.getElementById("total").innerText;
+    localStorage.setItem("total", total);
+}
+    getFirebaseData();
+   function sendData_2() {
+    let nhietdo_2 = document.getElementById("nhietdo_2").innerText;
+    localStorage.setItem("nhietdo_2", nhietdo_2);
+
+    let doam_2 = document.getElementById("doam_2").innerText;
+    localStorage.setItem("doam_2", doam_2);
+
+    let total_2 = document.getElementById("total_2").innerText;
+    localStorage.setItem("total_2", total_2);
+}
+
+
+      // Thêm dữ liệu vào bảng
+  
+</script>
+
+<script>
+  
+getFirebaseData(); 
+  sendData(); 
+  sendData_2(); 
+  UpdateImage1();
+  UpdateImage2();
+  UpdateImage3();
+  UpdateImage4();
+  UpdateALL();
+
+</script>
+
+</body>
+</html>

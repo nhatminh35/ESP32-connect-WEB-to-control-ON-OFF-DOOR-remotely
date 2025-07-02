@@ -1,0 +1,440 @@
+body {
+     
+    height: 100%;
+    width: 100%;
+    background-color: lightgray;
+    bottom:200px;
+}
+
+
+.square-box {
+    
+    width: 320px; /* Mỗi thiết bị khoảng 300px + khoảng cách */
+    height: 170px; /* Cao vừa phải */
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Đưa nội dung lên trên */
+    border: 3px solid black;
+    float: left;
+    position: relative;
+    bottom: 770px;  
+    right: 100px;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+
+.device-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 cột cho 2 thiết bị */
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+}
+
+
+
+.lamp {
+    width: 145px; /* Kích thước ảnh nhỏ hơn */
+    height: 145px;
+    justify-content: center;
+    align-items: center;
+}
+
+#main{
+    
+    min-height:1300px ;
+    width: 1500px;
+    background-color: rgba(158, 158, 158, 0.301);
+    background-image: url("b.jpg");
+    justify-content: center;
+    align-items: center;
+    border-radius: 90px; /* Bo góc 20px */
+  
+}
+#main::after {
+    content: "";
+    position: absolute;
+    top: 59%; /* Điều chỉnh vị trí tùy ý */
+    left: 750px;
+
+    height: 2px;
+    background-color: black;
+    width: 52%; /* hoặc bạn đặt width: 250px; */
+    height: 2px;
+    transform: translateX(-50%);
+}
+#main #top{
+   min-height: 50px;
+   justify-content: center;
+   align-items: center;
+
+}
+#main #bot{
+    min-height: 50px;
+    justify-content: bottom;
+    align-items: bottom;
+
+}
+#main #right{
+    min-height: 50px;
+    justify-content: right;
+    align-items: right;
+
+}
+#main #left{
+    min-height: 50px;
+    justify-content: right;
+    align-items: right;
+
+}
+#time{
+    position: relative; 
+    font-family: tahoma;
+    left:700px;
+    font-size: 200%;
+    
+}
+.btn {
+    padding: 10px 10px;  /* Giảm padding để làm nhỏ button */
+    font-size: 40px;    /* Giảm kích thước chữ */
+    height: 20px;       /* Chiều cao nhỏ gọn */
+    min-width: 100px;    /* Độ rộng tối thiểu */
+    border-radius: 50px; /* Làm tròn góc để giống viên thuốc */
+    justify-content: center;
+    align-items: center;  
+    gap: 4px;
+    right: 20px;
+   bottom: 525px;
+}
+
+.image-container {
+    flex: 1;
+    display: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa ảnh và button */
+    
+}
+
+
+h1 {
+  font-family: "Dangrek", serif;
+  background: linear-gradient(45deg, #ff0000, #1a53ff, #ea01ff, #fcfc00);
+  background-clip: text;
+  color: transparent;
+  background-size: 400% 400%;
+  animation: gradient 3s infinite;
+}
+
+h2 {
+    color: #302f2f; /* Cam đậm, nổi bật trên nền xám */
+    font-family: times new roman;
+    font-size: 300%;
+
+}
+h3 {
+    font-family: "Dangrek", serif;
+    background: linear-gradient(45deg, #ff0000, #1a53ff, #ea01ff, #fcfc00);
+    background-clip: text;
+    color: transparent;
+    background-size: 400% 400%;
+    animation: gradient 3s infinite;
+  }
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fontmain{
+    position: relative; 
+    bottom: 135px;   
+    left: 0px;
+}
+.fontname{
+    position: relative; 
+    top: 350px;   
+    right:10px;
+    font-size: 50%;
+    
+}
+.mainpositon{
+    position: relative; 
+    top: 100px;   
+    left:750px;  
+    size: 150%;
+}
+.all{
+    position: relative; 
+    top: 30px;   
+    left: 1350px;
+    size: 250%;
+}   
+.ChangePage{
+    position: relative; 
+    bottom: 15px;   
+    left:38%;
+    size: 250%;
+}
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: lightgray;
+}
+.input-container {
+    margin-bottom: 20px;
+}
+.image_left{
+    position: relative; 
+    bottom:750px;   
+    left:100px; 
+}
+.image_right{
+    position: relative; 
+    bottom:850px;     
+    left:1250px
+}
+.btn_trang2{
+    position: fixed;
+    bottom:1750px;
+    left:3500px; 
+    size: 550%;
+}
+.font-main{
+    font-size: 30px; 
+}
+.clear_storage{
+    position: fixed;
+    bottom:520px;
+    left:1500px; 
+    size: 1050%;
+}
+.xomtro1{
+    position: relative; 
+    top:200px;     
+    right:60px;
+}
+
+.potion_button_xom1 {
+    position: relative; 
+    bottom: 655px;     
+    right: 50px;
+    
+}
+
+.xomtro2{
+    position: relative; 
+    
+    bottom: 70px;     
+  
+}
+.potion_button_xom2{
+    position: relative; 
+    bottom:270px;     
+    right:60px;
+}
+.nhietdo{
+    position: relative; 
+    top: 70px;   
+    right:470px;
+    font-size: 50%;
+
+
+}
+.nhietdo_2{
+    position: relative; 
+    top: 270px;   
+    right:470px;
+    font-size: 50%;
+
+
+}
+#downloadPDF,
+#CLEAR_STORAGE {
+    font-size: 40px;
+    padding: 55px 30px;
+    border-radius: 100px;
+    cursor: pointer;
+    width: 300px; /* ✅ Đặt chiều ngang giống nhau */
+    bottom: 500px;
+    right: 1000px;
+}
+.OPEN_QUICKLY_1{
+    
+    top:50px;
+    left:1000px;   
+}
+.square-box_1{
+    width: 280px; /* Mỗi thiết bị khoảng 300px + khoảng cách */
+    height: 170px; /* Cao vừa phải */
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Đưa nội dung lên trên */
+    border: 3px solid black;
+    float: left;
+    position: relative;
+    bottom: 940px;
+    right: 500px;
+    border-radius: 50px;
+    padding: 10px;
+}
+.image-container_1{
+flex: 0;
+    display: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa ảnh và button */
+    
+} 
+.device-container_1 {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr; /* 2 cột cho 2 thiết bị */
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+}
+.OPEN_QUICKLY_2{
+    display: relative;
+    bottom:200px;
+    left:1000px;   
+
+}
+.square-box_4{
+    width: 280px; /* Mỗi thiết bị khoảng 300px + khoảng cách */
+    height: 170px; /* Cao vừa phải */
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Đưa nội dung lên trên */
+    border: 3px solid black;
+    float: left;
+    position: relative;
+    bottom: 670px;
+    right: 500px;
+    border-radius: 50px;
+    padding: 10px;
+}
+.image-container_4{
+flex: 0;
+    display: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa ảnh và button */
+    
+} 
+.device-container_2 {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr; /* 2 cột cho 2 thiết bị */
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+}
+.QUICKLY_1{
+    position: relative; 
+    top:20px;     
+    left:710px;
+}
+.QUICKLY_2{
+    position: relative; 
+    top:410px;     
+    left:710px;
+}
+.ChangePage_1{
+    position: fixed ; 
+    top: 1900px;   
+    left: 1625px;
+    size: 450%;
+}
+
+.square-box_2{
+    width: 400px; /* Mỗi thiết bị khoảng 300px + khoảng cách */
+    height: 680px; /* Cao vừa phải */
+    background-color: rgb(196, 196, 196);
+    display: flex;
+    justify-content: center;
+    
+    border: 3px solid black;
+    float: left;
+    position: relative;
+    top: 30px;
+    right: 1000px;
+    border-radius: 50px;
+    padding: 10px;
+     border-top-left-radius: 20px;
+     border-top-right-radius: 20px;
+     border-bottom-right-radius: 20px;
+     border-bottom-left-radius: 35px;
+}
+.image-container_2{
+flex: 0;
+    display: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa ảnh và button */
+    
+} 
+.square-box_3{
+    width: 400px; /* Mỗi thiết bị khoảng 300px + khoảng cách */
+    height: 680px; /* Cao vừa phải */
+    background-color: rgb(199, 196, 196);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Đưa nội dung lên trên */
+    border: 3px solid black;
+    float: left;
+    position: relative;
+    top: 30px;
+    right: 950px;
+    border-radius: 50px;
+    padding: 10px;
+         border-top-left-radius: 20px;
+     border-top-right-radius: 20px;
+     border-bottom-right-radius: 20px;
+     border-bottom-left-radius: 35px;
+}
+.image-container_3{
+flex: 0;
+    display: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa ảnh và button */
+     border-radius: 12px; /* Bo tròn container */
+} 
+.Xomtro_1{
+position:relative;
+bottom:600px;
+left:630px;
+}
+.Xomtro_2{
+position:relative;
+bottom:600px;
+left:950px;
+    
+}
+.Xomtro_1_1{
+position:relative;
+bottom:480px;
+right:200px;
+}
+.Xomtro_2_2{
+position:relative;
+bottom:180px;
+right: 350px;
+}

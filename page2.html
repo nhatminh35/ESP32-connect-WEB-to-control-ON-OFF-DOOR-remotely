@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  
+  <script src="functions.js"></script>
+    <link rel="stylesheet" href="./style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+ 
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href = "./clock.css">
+  
+</head>
+<body id="mainBody">
+ 
+  <div class="container-clock-alarm">
+    <h1 class="rainbow-title" style="text-align:center;">THÊM VÀ XOÁ VÂN TAY QUẢN LÝ</h1>
+
+
+
+
+    <div class="clock-temp-wrapper">
+     
+      <div class="left-panel">
+        <div class="clock-container" id="clock">
+          <div class="hand hour" id="hourHand"></div>
+          <div class="hand minute" id="minuteHand"></div>
+          <div class="hand second" id="secondHand"></div>
+          <div class="center-dot"></div>
+        </div>
+    
+        <div id="numbers"></div>
+        <p>📅 Date: <span id="currentDate"></span></p>
+        <label for="alarmTime">⏰ Alarm Time:</label>
+        <input type="time" id="alarmTime">
+        <button onclick="setAlarm()">Set Alarm</button>
+        <button onclick="stopAlarm()">Stop Alarm</button>
+      </div>
+     
+      <div class="right-panel">
+        <div class="position">      
+        <div class="alertDevices">
+
+          <div class="button_ID1">
+            <div class="position_1">
+               
+       
+          <input type="text" class="number-input" id="inputNumber1" placeholder="Nhập số tại đây" readonly /><br><br>
+         
+          <div class="button-row">
+            
+          <button type="button" id="btn13" class="btn waves-effect waves-lights"style="padding: 5px 10px; font-size: 20px; height: 50px; min-width: 30px;">THÊM</button>
+          <button type="button" id="btn14" class="btn waves-effect waves-lights"style="padding: 5px 10px; font-size: 20px; height: 50px; min-width: 30px;">XOÁ</button>  
+       
+     
+        </div>
+         
+
+        </div>
+        
+        <div class="button_ID1">
+         <div class="position_2">
+          
+            <input type="number" class="number-input" id="inputNumber2" placeholder="Nhập số tại đây"><br><br>
+            
+            <div class="button-row">
+            
+            <button type="button" id="btn15" class="btn waves-effect waves-lights"style="padding: 5px 10px; font-size: 20px; height: 50px; min-width: 30px;">THÊM</button>
+            <button type="button" id="btn16" class="btn waves-effect waves-lights"style="padding: 5px 10px; font-size: 20px; height: 50px; min-width: 30px;">XOÁ</button>  
+          </div>
+       </div>
+    </div>      
+  </div>  
+  </div>
+
+        <div class="alarm-toggle flex gap-4 justify-center mt-4">
+<div class = "Xomtro_1">
+<h1 class="rainbow-title" style="text-align:center;">Xóm Trọ 1</h1>
+</div>
+<div class = "Xomtro_2">
+<h1 class="rainbow-title" style="text-align:center;">Xóm Trọ 2</h1>
+</div>
+
+<div class = "Xomtro_1_1">
+<h1 class="rainbow-title" style="text-align:center;">Xóm Trọ 1</h1>
+</div>
+<div class = "Xomtro_2_2">
+<h1 class="rainbow-title" style="text-align:center;">Xóm Trọ 2</h1>
+</div>
+
+
+         
+          </div>
+        </div>        
+        <div id="tempWarning"></div>
+      </div>
+    </div>
+    <div class="button-group">
+      <a href="index.html" class="btn-blue">Trang Chính</a>
+      <a href="page1.html" class="btn-green">Data</a>
+    </div>
+  </div>  
+  <div class="square-box_2">
+      <div class="image-container_2">
+  <div class="grid" id="buttonGrid"></div>
+      </div>
+  </div>
+    <div class="square-box_3">
+      <div class="image-container_3">
+<div id="buttonGrid2" class="grid"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+ 
+
+
+  document.getElementById("btn13").addEventListener("click", function () {
+  console.log("Button đã được nhấn!");
+ 
+  const ID1 = Number(document.getElementById("inputNumber1").value);
+  
+ if(ID1 > 0 ){
+  // Đẩy dữ liệu lên đường dẫn /FINGER_DATA/ID1
+  firebase.database().ref("/FINGER_DATA").update({
+    ID1: ID1,
+    check1: 1
+   
+  })
+    addID1(ID1);
+}
+document.getElementById("inputNumber1").value = "";
+});
+
+document.getElementById("btn14").addEventListener("click", function () {
+  console.log("Button đã được nhấn!");
+ 
+  const ID1 = Number(document.getElementById("inputNumber1").value);
+  
+ if(ID1 > 0 ){
+  // Đẩy dữ liệu lên đường dẫn /FINGER_DATA/ID1
+  firebase.database().ref("/FINGER_DATA").update({
+    ID1: ID1,
+    check1: 0
+    
+  })
+   removeID1(ID1);
+ }
+});
+
+document.getElementById("btn15").addEventListener("click", function () {
+  console.log("Button đã được nhấn!");
+ 
+  const ID2 = Number(document.getElementById("inputNumber2").value);
+ 
+ if(ID2 > 0 ){
+  // Đẩy dữ liệu lên đường dẫn /FINGER_DATA/ID1
+  firebase.database().ref("/FINGER_DATA").update({
+    ID2: ID2,
+    check2: 1
+    
+  })
+  addID2(ID2);
+}
+});
+document.getElementById("btn16").addEventListener("click", function () {
+  console.log("Button đã được nhấn!");
+ 
+  const ID2 = Number(document.getElementById("inputNumber2").value);
+ 
+  if(ID2 > 0 ){
+  // Đẩy dữ liệu lên đường dẫn /FINGER_DATA/ID1
+  firebase.database().ref("/FINGER_DATA").update({
+    ID2: ID2,
+    check2: 0
+ 
+  })
+ removeID2(ID2);
+}
+});
+
+</script>
+ 
+  <script>
+
+    let ID1List = [];
+    let ID2List = [];
+    let alarmTime = null;
+    let alarmSet = false;
+    let tempAlarmEnabled = true;
+    const alarmSound = new Audio("mp3/music.mp3");
+    const tempWarningSound = new Audio("mp3/coibaodong.mp3");
+
+
+
+
+    function drawClockNumbers() {
+      for (let i = 1; i <= 12; i++) {
+        const angle = (i * 30) * Math.PI / 180;
+        const radius = 125;
+        const x = 150 + radius * Math.sin(angle);
+        const y = 150 - radius * Math.cos(angle);
+        const number = document.createElement("div");
+        number.className = "number";
+        number.style.left = `${x}px`;
+        number.style.top = `${y}px`;
+        number.innerText = i;
+        document.getElementById("clock").appendChild(number);
+      }
+    }
+
+    function updateClock() {
+      const date = new Date();
+      const h = date.getHours();
+      const m = date.getMinutes();
+      const s = date.getSeconds();
+      const hourDeg = (h % 12) * 30 + m * 0.5;
+      const minuteDeg = m * 6;
+      const secondDeg = s * 6;
+      document.getElementById("hourHand").style.transform = `rotate(${hourDeg}deg)`;
+      document.getElementById("minuteHand").style.transform = `rotate(${minuteDeg}deg)`;
+      document.getElementById("secondHand").style.transform = `rotate(${secondDeg}deg)`;
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      document.getElementById("currentDate").innerText = `${day}/${month}/${year}`;
+
+      if (alarmSet && alarmTime) {
+        const currentStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+        if (currentStr === alarmTime) {
+          playAlarm();
+          alarmSet = false;
+          document.getElementById("alarmTime").disabled = false;
+        }
+      }
+    }
+
+    window.onload = function () {
+       loadArrays();
+    const savedAlarm = localStorage.getItem("alarmTime");
+    if (savedAlarm) {
+        document.getElementById("alarmTime").value = savedAlarm;
+        alarmTime = savedAlarm;
+        alarmSet = true;
+        document.getElementById("alarmTime").disabled = true;
+    }
+};
+
+
+function setAlarm() {
+    const input = document.getElementById("alarmTime").value;
+    if (!input) {
+        alert("Please set alarm time");
+        return;
+    }
+    alarmTime = input;
+    alarmSet = true;
+    document.getElementById("alarmTime").disabled = true;
+    
+    // Lưu vào localStorage
+    localStorage.setItem("alarmTime", alarmTime);
+    localStorage.setItem("alarmSet", "true");
+
+    alert("Alarm set for " + alarmTime);
+}
+
+
+
+    function playAlarm() {
+      if (alarmSound.paused || alarmSound.ended) {
+        alarmSound.currentTime = 0;
+        alarmSound.play();
+      }
+    }
+
+    function stopAlarm() {
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
+    tempWarningSound.pause();
+    tempWarningSound.currentTime = 0;
+    document.getElementById("tempWarning").innerHTML = "";
+
+    // Xóa khỏi localStorage
+    localStorage.removeItem("alarmTime");
+    localStorage.removeItem("alarmSet");
+
+    alarmSet = false;
+    document.getElementById("alarmTime").disabled = false;
+}
+function addID1(id) {
+  if (!ID1List.includes(id)) {
+    ID1List.push(id);
+    saveArrays();
+  }
+  updateDisplay();
+}
+
+function addID2(id) {
+  if (!ID2List.includes(id)) {
+    ID2List.push(id);
+    saveArrays();
+  }
+  updateDisplay();
+}
+function removeID1(id) {
+  ID1List = ID1List.filter(item => item !== id);
+ saveArrays();
+  updateDisplay();
+}
+function removeID2(id) {
+  ID2List = ID2List.filter(item => item !== id);
+ saveArrays();
+  updateDisplay();
+}
+
+function updateDisplay() {
+  document.getElementById("displayID1").innerText = ID1List.join(", ") || "...";
+  document.getElementById("displayID2").innerText = ID2List.join(", ") || "...";
+}
+function hienThiID() {
+  document.getElementById("displayID1").innerText = "...";
+  document.getElementById("displayID2").innerText = "...";
+}
+
+function saveArrays() {
+  localStorage.setItem('ID1List', JSON.stringify(ID1List));
+  localStorage.setItem('ID2List', JSON.stringify(ID2List));
+}
+
+// Hàm tải mảng từ localStorage khi reload trang
+function loadArrays() {
+  const storedArray1 = localStorage.getItem('ID1List');
+  const storedArray2 = localStorage.getItem('ID2List');
+  if (storedArray1) ID1List = JSON.parse(storedArray1);
+  if (storedArray2) ID2List = JSON.parse(storedArray2);
+   updateDisplay();
+
+}
+
+    const firebaseConfig = {
+          apiKey: "AIzaSyDUYbFI63SZmYV9SAyj_MCZcduuisIqxxc",
+          authDomain: "minhnode-1eacf.firebaseapp.com",
+          databaseURL: "https://minhnode-1eacf-default-rtdb.firebaseio.com",
+          projectId: "minhnode-1eacf",
+          storageBucket: "minhnode-1eacf.firebasestorage.app",
+          messagingSenderId: "1007786576866",
+          appId: "1:1007786576866:web:0810872495a6184ae747bb",
+          measurementId: "G-YF59ZNWLKC"
+      };
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+  //functions
+  // make sure that the name in ' ' match with name of your database child
+
+
+    drawClockNumbers();
+    setInterval(updateClock, 100);
+    hienThiID();
+    
+  </script>
+</body>
+
+</html>
+<script>
+  // Hàm tạo nút và xử lý cho từng grid + input + localStorage key riêng
+  function createButtonGrid(buttonGridId, inputId, storageKey) {
+    const buttonGrid = document.getElementById(buttonGridId);
+    const inputBox = document.getElementById(inputId);
+    let selectedValues = [];
+
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      selectedValues = JSON.parse(saved);
+    }
+
+    for (let i = 1; i <= 128; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+
+      if (selectedValues.includes(i.toString())) {
+        btn.classList.add("activated");
+      }
+
+      btn.addEventListener("click", () => {
+        const value = btn.textContent;
+
+        if (btn.classList.contains("activated")) {
+          btn.classList.remove("activated");
+          selectedValues = selectedValues.filter(v => v !== value);
+        } else {
+          btn.classList.add("activated");
+          selectedValues.push(value);
+        }
+
+        inputBox.value = value;
+        localStorage.setItem(storageKey, JSON.stringify(selectedValues));
+      });
+
+      buttonGrid.appendChild(btn);
+    }
+
+    if (selectedValues.length > 0) {
+      inputBox.value = selectedValues[selectedValues.length - 1];
+    }
+  }
+
+  // Khởi tạo 2 grids riêng biệt
+  createButtonGrid("buttonGrid", "inputNumber1", "selectedButtons1");
+  createButtonGrid("buttonGrid2", "inputNumber2", "selectedButtons2");
+</script>
+
+
+<style>
+
+    .grid {
+      display: grid;
+      position:relative;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 5px;
+      max-width: 400px;
+     
+    
+    background-color: white;
+    }
+
+    .grid button {
+      padding: 10px;
+      background-color: lightgray;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .grid button.activated {
+      background-color: red;
+      color: white;
+    }
+
+    #myInput {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      text-align: center;
+    }
+
+</style>

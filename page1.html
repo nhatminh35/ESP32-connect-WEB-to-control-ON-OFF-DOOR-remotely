@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng hiển thị dữ liệu từ Firebase</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="functions.js"></script>
+   
+ 
+</head>
+<body onload="startAutoUpdate();">
+<script>
+
+  function startAutoUpdate() {
+    database.ref("/TOTAL_PEOPLE/IN").once("value").then((snapshot) => {
+            let total = snapshot.val();
+            document.getElementById("total").innerText = total;
+            
+        });
+    database.ref("/TOTAL_PEOPLE_2/IN").once("value").then((snapshot) => {
+            let total_2 = snapshot.val();
+            document.getElementById("total_2").innerText = total_2;
+            
+        });
+    loadData();
+    loadData_2();
+    listenFirebaseChanges_2();
+    listenFirebaseChanges();
+    UPDATE_ARRAY_ALL_1();
+    // Gọi ngay lần đầu khi trang load
+    // Tự động cập nhật mỗi 3 giây
+
+}
+
+</script>
+
+      <div class="font-main">
+    <div class="background">
+        <div class="body">    
+            <div class="main">
+
+            <h1 style="text-align:center;">WELCOM TO Đồ Án 1</h1>
+            <h1 style="text-align:center;">Bảng Thu Thập Dữ Liệu </h1>
+
+                   <div class ="ChangePage_1">
+   <a href="index.html" style="padding: 20px 90px;font-size: 30px; height: 100px; min-width: 500px; background-color: #20c997; color: white; text-decoration: none; border-radius: 10px;">Device</a>
+   <a href="page2.html" style="padding: 20px 90px;font-size: 30px; height: 100px; min-width: 500px; background-color: #20c997; color: white; text-decoration: none; border-radius: 10px;">Vân Tay</a>
+                     
+    </div> 
+  <div style="display: flex; height: 100vh;">
+
+    <!-- BÊN TRÁI -->
+    <div style="flex: 1; padding: 20px; border-right: 2px solid gray;">
+      <h3 style="text-align: center;">Xóm Trọ 1</h3>
+        <p style="display: none;"><b>ID: <span id="nhietdo">--</span></b></p>
+        <p style="display: none;"><b>Trạng Thái: <span id="doam">--</span></b></p>
+  
+        <p><b>Tổng: <span id="total">--</span></b></p>
+      <table id="dataTable" border="1" width="100%">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã Số Phòng </th>
+            <th>Trạng Thái</th>
+            <th>Thời Gian</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+
+      <div style="position: fixed; bottom: 1270px; left: 4300px;">
+        <button id="downloadPDF" class="btn waves-effect waves-light">Tải PDF</button>      
+        <button id="CLEAR_STORAGE" class="btn waves-effect waves-light red">CLEAR</button>
+      </div>
+    </div>
+
+  
+    <!-- BÊN PHẢI (bạn có thể thêm dữ liệu khác ở đây sau) -->
+    <div style="flex: 1; padding: 20px;">
+      <h3 style="text-align: center;">Xóm Trọ 2</h3>
+
+      <p style="display: none;"><b>ID: <span id="nhietdo_2"></span></b></p>
+      <p style="display: none;"><b>Trạng Thái: <span id="doam_2">--</span></b></p>
+      <p><b>Tổng: <span id="total_2">--</span></b></p>
+
+      <table id="dataTableB" border="1" width="100%">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã Số Phòng</th>
+            <th>Trạng Thái</th>
+            <th>Thời Gian</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    
+
+
+ 
+      
+    </div>
+
+
+    </div>
+
+  </div>
+</body>
+
+
+   
+       
+</body>
+
+    <script>
+        
+      // Cấu hình Firebase
+      const firebaseConfig = {
+          apiKey: "AIzaSyDUYbFI63SZmYV9SAyj_MCZcduuisIqxxc",
+          authDomain: "minhnode-1eacf.firebaseapp.com",
+          databaseURL: "https://minhnode-1eacf-default-rtdb.firebaseio.com",
+          projectId: "minhnode-1eacf",
+          storageBucket: "minhnode-1eacf.firebasestorage.app",
+          messagingSenderId: "1007786576866",
+          appId: "1:1007786576866:web:0810872495a6184ae747bb",
+          measurementId: "G-YF59ZNWLKC"
+      };
+      firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+  
+      let latestTemp = null;
+      let dataList = JSON.parse(localStorage.getItem("dataList")) || [];
+      let dataListB = JSON.parse(localStorage.getItem("dataListB")) || [];
+     
+      // Hàm lấy thời gian thực
+      function getCurrentTime() {
+          let time = new Date();
+          let gio = String(time.getHours()).padStart(2, '0');
+          let phut = String(time.getMinutes()).padStart(2, '0');
+          let giay = String(time.getSeconds()).padStart(2, '0');
+          return `${gio}:${phut}:${giay}`;
+      }
+  
+      // Lắng nghe nhiệt độ từ Firebase
+
+  
+let lastID = null;
+let lastStatus = null;
+
+let lastID_2 = null;
+let lastStatus_2 = null;
+
+
+let last_time_2 = null;
+
+
+
+let last_time_1 = null; // biến toàn cục lưu thời gian lần cuối đã xử lý (dạng hh:mm:ss hoặc timestamp)
+
+function listenFirebaseChanges() {
+    const inOutRef = database.ref("/IN_OUT");
+
+    inOutRef.on("value", (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
+
+        const currentID = data.ID;
+        const currentStatus = data.Trang_Thai;
+        
+        // Kiểm tra xem dữ liệu đã tồn tại chưa
+        const newStatus = (currentStatus == 0 || currentStatus == "0") ? "RA" : "VÀO";
+        const lastItem = dataList[dataList.length - 1];
+
+        if (lastItem && lastItem.nhietdo == currentID && lastItem.doam == newStatus) {
+            // Trùng với dòng cuối cùng đã lưu, không thêm nữa
+            return;
+        }
+
+        // Cập nhật dữ liệu hiển thị
+        document.getElementById("nhietdo").innerText = currentID;
+        document.getElementById("doam").innerText = newStatus;
+
+        addRow(currentID, newStatus);
+
+        // Cập nhật tổng
+        database.ref("/TOTAL_PEOPLE/IN").once("value").then((snapshot) => {
+            let total = snapshot.val();
+            document.getElementById("total").innerText = total;
+            
+        });
+         
+
+    });
+}
+
+
+function listenFirebaseChanges_2() {
+    const inOutRef_2 = database.ref("/IN_OUT_2");
+
+
+    inOutRef_2.on("value", (snapshot) => {
+        const data_2 = snapshot.val();
+        if (!data_2) return;
+         
+        const currentID_2 = data_2.ID;
+        const currentStatus_2 = data_2.Trang_Thai;
+
+        // Kiểm tra xem dữ liệu đã tồn tại chưa
+        const newStatus_2 = (currentStatus_2 == 0 || currentStatus_2 == "0") ? "RA" : "VÀO";
+        const lastItem_2 = dataListB[dataListB.length - 1];
+
+       if (lastItem_2 && lastItem_2.nhietdo == currentID_2 && lastItem_2.doam == newStatus_2) {
+    return;
+}
+
+        // Cập nhật dữ liệu hiển thị
+        document.getElementById("nhietdo_2").innerText = currentID_2; 
+        document.getElementById("doam_2").innerText = newStatus_2;
+         database.ref("/TOTAL_PEOPLE_2/IN").once("value").then((snapshot) => {
+             let total_2 = snapshot.val();
+         document.getElementById("total_2").innerText = total_2;
+             });
+        addRow_2(currentID_2, newStatus_2);
+
+    });
+}
+
+
+           // Khi nhiệt độ thay đổi, lấy độ ẩm hiện tại và lưu cả hai
+ 
+    function loadData() {
+    let table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
+    table.innerHTML = ""; // Xóa dữ liệu cũ trên bảng trước khi tải lại
+
+    dataList.forEach((data, index) => {
+        let newRow = table.insertRow();
+        let cell1 = newRow.insertCell(0);
+        let cell2 = newRow.insertCell(1);
+        let cell3 = newRow.insertCell(2);
+        let cell4 = newRow.insertCell(3);
+
+        cell1.innerHTML = index + 1;
+        cell2.innerHTML = data.nhietdo;
+        cell3.innerHTML = data.doam;
+        cell4.innerHTML = data.time;
+    });
+}  
+
+    function loadData_2() {
+    let table = document.getElementById("dataTableB").getElementsByTagName('tbody')[0];
+    table.innerHTML = ""; // Xóa dữ liệu cũ trên bảng trước khi tải lại
+
+    dataListB.forEach((data, index) => {
+        let newRow = table.insertRow();
+        let cell1 = newRow.insertCell(0);
+        let cell2 = newRow.insertCell(1);
+        let cell3 = newRow.insertCell(2);
+        let cell4 = newRow.insertCell(3);
+
+        cell1.innerHTML = index + 1;
+        cell2.innerHTML = data.nhietdo;
+        cell3.innerHTML = data.doam;
+        cell4.innerHTML = data.time;
+    });
+}
+
+
+function addRow(nhietdo, doam) {
+    let table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
+    
+    let currentTime = getCurrentTime(); // Lấy thời gian hiện tại dạng "hh:mm:ss"
+
+    // Nếu có phần tử cũ, kiểm tra thời gian
+    if (dataList.length > 0) {
+        let lastItem = dataList[dataList.length - 1];
+        let lastTime = timeStringToSeconds(lastItem.time);
+        let nowTime = timeStringToSeconds(currentTime);
+
+        if ((nowTime - lastTime) < 3) {
+            console.log("Bỏ qua vì chưa đủ 3 giây so với phần tử trước");
+            return; // Không thêm vào mảng
+        }
+    }
+
+    // Thêm dữ liệu mới vào danh sách
+    dataList.push({ nhietdo, doam, time: currentTime });
+
+    // Giữ tối đa 100 phần tử
+    if (dataList.length > 100) {
+        dataList.shift(); // Xóa phần tử đầu tiên (cũ nhất)
+        //dataList = []; // Xóa toàn bộ phần tử trong mảng nếu muốn reset hết
+    }
+
+    // Cập nhật localStorage
+    localStorage.setItem("dataList", JSON.stringify(dataList));
+
+    // Làm mới bảng dữ liệu
+    loadData();
+}
+
+
+
+function addRow_2(nhietdo_2, doam_2) {
+    let table = document.getElementById("dataTableB").getElementsByTagName('tbody')[0];
+    
+    let currentTime = getCurrentTime(); // Lấy thời gian hiện tại dạng "hh:mm:ss"
+
+    // Nếu có phần tử cũ, kiểm tra thời gian
+    if (dataListB.length > 0) {
+        let lastItem = dataListB[dataListB.length - 1];
+        let lastTime = timeStringToSeconds(lastItem.time);
+        let nowTime = timeStringToSeconds(currentTime);
+
+        if ((nowTime - lastTime) < 3) {
+            console.log("Bỏ qua vì chưa đủ 3 giây so với phần tử trước");
+            return; // Không thêm vào mảng
+        }
+    }
+
+    // Thêm dữ liệu mới vào danh sách của Xóm Trọ B
+    dataListB.push({ nhietdo: nhietdo_2, doam: doam_2, time: currentTime });
+
+    // Giữ tối đa 20 phần tử
+    if (dataListB.length > 20) {
+        dataListB.shift(); // Xóa phần tử đầu tiên (cũ nhất)
+    }
+
+    // Cập nhật localStorage với dữ liệu của Xóm Trọ B
+    localStorage.setItem("dataListB", JSON.stringify(dataListB));
+
+    // Làm mới bảng dữ liệu của Xóm Trọ B
+    loadData_2();
+}
+
+// Hàm chuyển time string "hh:mm:ss" thành số giây từ đầu ngày
+function timeStringToSeconds(timeString) {
+    const parts = timeString.split(':');
+    return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
+}
+
+
+
+  </script>
+  <script>
+    
+    document.getElementById("downloadPDF").addEventListener("click", function () {
+        let element = document.querySelector(".background"); // Chọn phần cần xuất PDF
+        html2pdf()
+            .set({
+                margin: 10,
+                filename: 'SmartHome_Report.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a3', orientation: 'portrait' }
+            })
+            .from(element)
+            .save();
+        });
+            document.getElementById("CLEAR_STORAGE").addEventListener("click", function () {
+   
+                dataList = []; 
+                dataListB = []; 
+                localStorage.removeItem("dataList"); // Xóa dữ liệu trong localStorage
+                localStorage.removeItem("dataListB"); // Xóa dữ liệu trong localStorage
+                localStorage.removeItem("nhietdo"); // Xóa dữ liệu trong localStorage
+                localStorage.removeItem("nhietdo_2"); // Xóa dữ liệu trong localStorage
+
+    loadData();
+    loadData_2();
+
+     
+    });
+
+
+    listenFirebaseChanges_2();
+    listenFirebaseChanges();
+
+    </script>
+    
+   
+  
